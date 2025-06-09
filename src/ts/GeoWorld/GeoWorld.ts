@@ -1,4 +1,4 @@
-import { GridHelper, Group, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { AdditiveBlending, DoubleSide, GridHelper, Group, Mesh, MeshBasicMaterial, PerspectiveCamera, PlaneGeometry, Scene, WebGLRenderer } from "three";
 import { IGeoWorld } from "../interfaces/IGeoWorld";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Sizes from "../Utils/Sizes";
@@ -32,11 +32,11 @@ export default class GeoWorld {
     })
 
     this.resources = new Resources(async () => {
-      this.createMap(this.resources.textures.grid, this.resources.textures.gridBlack);
+      this.createMap(this.resources.textures.grid, this.resources.textures.gridBlack, this.resources.textures.bg);
     })
   }
 
-  createMap(gridTexture, gridBlackTexture){
+  createMap(gridTexture, gridBlackTexture, bgTexture){
     const group = new Group();
     this.scene.add(group);
 
@@ -46,6 +46,23 @@ export default class GeoWorld {
     grid.translateY(-5);
     grid.renderOrder = 1;
     group.add(grid);
+
+    const radius3 = 180;
+    const plane3 = new PlaneGeometry(radius3, radius3);
+    const material3 = new MeshBasicMaterial({
+      map: bgTexture,
+      color: 0x30dcff,
+      transparent: true,
+      opacity: 0.5,
+      side: DoubleSide,
+      depthWrite: false,
+      blending: AdditiveBlending,
+    });
+    const mesh3 = new Mesh(plane3, material3);
+    mesh3.name = 'main_circle3';
+    mesh3.translateZ(-3);
+    mesh3.renderOrder = 4;
+    group.add(mesh3);
 
     this.floorBg = new FloorBg({
       group: group,

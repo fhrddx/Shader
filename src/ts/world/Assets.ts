@@ -11,7 +11,8 @@ export interface IResources {
 const filePath = './images/'
 const fileSuffix = [
   'grid',
-  'gridBlack'
+  'gridBlack',
+  'bg'
 ]
 
 const textures = fileSuffix.map(item => {
