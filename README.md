@@ -1,8 +1,5 @@
 # 蜂窝网格特效
 
-![示例图片](./readme/newmkvgif.gif)
-
-
 yarn
 
 yarn dev
