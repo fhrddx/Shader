@@ -1,13 +1,9 @@
-import { AxesHelper, Intersection, Mesh, PerspectiveCamera, Raycaster, RepeatWrapping, Scene, Vector2, WebGLRenderer } from "three";
+import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
 import { IGeoWorld } from "../interfaces/IGeoWorld";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Sizes from "../Utils/Sizes";
 import { Basic } from "../world/Basic";
-import GeoMap from "./GeoMap";
-import { mapInfo, mapOptions } from "../types";
 import { Resources } from "../world/Resources";
-import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
-import shortNameMap from "./ShortNameMap";
 
 export default class GeoWorld {
   private scene: Scene;

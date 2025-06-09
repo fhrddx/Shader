@@ -1,7 +1,3 @@
-/**
- * 资源文件
- * 把模型和图片分开进行加载
- */
 
 interface ITextures {
   name: string
@@ -14,24 +10,8 @@ export interface IResources {
 
 const filePath = './images/earth/'
 const fileSuffix = [
-  'gradient',
-  'redCircle',
-  "label",
-  "aperture",
-  'glow',
-  'light_column',
-  'aircraft',
-  'flyline',
-  'flow',
-  'weixincircle',
-  'side',
-  'huiguang',
-  'guangquan01',
-  'guangquan02',
-  'point',
-  'rotationBorder1',
-  'rotationBorder2',
-  'pathLine'
+  'grid',
+  'gridBlack'
 ]
 
 const textures = fileSuffix.map(item => {
@@ -39,11 +19,6 @@ const textures = fileSuffix.map(item => {
     name: item,
     url: filePath + item + '.png'
   }
-})
-
-textures.push({
-  name: 'earth',
-  url: filePath + 'earth.jpg'
 })
 
 const resources: IResources = {

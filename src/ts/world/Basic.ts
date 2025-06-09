@@ -1,20 +1,14 @@
-/*
- * 创建 threejs 四大天王
- * 场景、相机、渲染器、控制器
- */
 
 import * as THREE from 'three';
 import {
   OrbitControls
 } from "three/examples/jsm/controls/OrbitControls";
-import { CSS3DRenderer } from 'three/examples/jsm/renderers/CSS3DRenderer.js';
 
 export class Basic {
   public dom: HTMLElement;
   public scene: THREE.Scene;
   public camera: THREE.PerspectiveCamera;
   public renderer: THREE.WebGLRenderer;
-  public css3DRenderer: CSS3DRenderer;
   public controls: OrbitControls;
   
   constructor(dom: HTMLElement) {
@@ -40,21 +34,13 @@ export class Basic {
     this.renderer.setPixelRatio(window.devicePixelRatio);
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     this.dom.appendChild(this.renderer.domElement);
-    //第4步，设置css3d渲染器
-    this.css3DRenderer = new CSS3DRenderer();
-    this.css3DRenderer.setSize(window.innerWidth, window.innerHeight);
-    this.css3DRenderer.domElement.style.position = 'absolute';
-    this.css3DRenderer.domElement.style.top = '0';
-    this.css3DRenderer.domElement.style.zIndex = '100';
-    document.body.appendChild(this.css3DRenderer.domElement);
   }
 
   //设置轨道控制器，主要目的是实现放大缩小、拖拽、点击， 原理是控制照相机的运行轨迹
   setControls() {
-    //注解：初始化轨道控制器，由于存在2个渲染器，这时候发现，css3DRenderer 这个反而是必须的，而renderer这个反而不是必须的
-    //this.controls = new OrbitControls(this.camera, this.renderer.domElement);
-    this.controls = new OrbitControls(this.camera, this.css3DRenderer.domElement);
-    //注解：这个是用来干什么的，暂时不是很清楚
+    //初始化轨道控制器
+    this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+    //这个是用来干什么的，暂时不是很清楚
     this.controls.autoRotateSpeed = 3
     //使动画循环使用时阻尼或自转，意思是否有惯性，设置为true，拖拽有惯性，更加丝滑
     this.controls.enableDamping = true;
