@@ -8,7 +8,7 @@ export interface IResources {
   textures?: ITextures[],
 }
 
-const filePath = './images/earth/'
+const filePath = './images/'
 const fileSuffix = [
   'grid',
   'gridBlack'

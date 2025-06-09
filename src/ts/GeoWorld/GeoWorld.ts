@@ -1,9 +1,10 @@
-import { PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { Group, PerspectiveCamera, Scene, WebGLRenderer } from "three";
 import { IGeoWorld } from "../interfaces/IGeoWorld";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Sizes from "../Utils/Sizes";
 import { Basic } from "../world/Basic";
 import { Resources } from "../world/Resources";
+import { FloorBg } from "./FloorBg";
 
 export default class GeoWorld {
   private scene: Scene;
@@ -12,6 +13,8 @@ export default class GeoWorld {
   private controls: OrbitControls;
   private sizes: Sizes;
   private resources: Resources;
+
+  private floorBg: FloorBg;
   
   constructor(option: IGeoWorld) {
     const basic = new Basic(option.dom);
@@ -29,12 +32,21 @@ export default class GeoWorld {
     })
 
     this.resources = new Resources(async () => {
-      const sideTexture = this.resources.textures.side;
-      this.createMap(sideTexture, sideTexture);
+      this.createMap(this.resources.textures.grid, this.resources.textures.gridBlack);
     })
   }
 
   createMap(gridTexture, gridBlackTexture){
+    const group = new Group();
+    this.scene.add(group);
+
+    this.floorBg = new FloorBg({
+      group: group,
+      grid: gridTexture,
+      gridBlack: gridBlackTexture,
+    });
+    this.floorBg.create();
+
     this.render();
   }
 
@@ -42,5 +54,8 @@ export default class GeoWorld {
     requestAnimationFrame(this.render.bind(this));
     this.renderer.render(this.scene, this.camera);
     this.controls && this.controls.update();
+    if(this.floorBg){
+      this.floorBg.tick(false);
+    }
   }
 }
