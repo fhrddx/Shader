@@ -1,4 +1,4 @@
-import { Group, PerspectiveCamera, Scene, WebGLRenderer } from "three";
+import { GridHelper, Group, PerspectiveCamera, Scene, WebGLRenderer } from "three";
 import { IGeoWorld } from "../interfaces/IGeoWorld";
 import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
 import Sizes from "../Utils/Sizes";
@@ -39,6 +39,13 @@ export default class GeoWorld {
   createMap(gridTexture, gridBlackTexture){
     const group = new Group();
     this.scene.add(group);
+
+    const grid = new GridHelper(300, 18, 0x122839, 0x122839);
+    grid.name = 'map_grid';
+    grid.rotateX(Math.PI / 2);
+    grid.translateY(-5);
+    grid.renderOrder = 1;
+    group.add(grid);
 
     this.floorBg = new FloorBg({
       group: group,
