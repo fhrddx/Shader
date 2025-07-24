@@ -56,7 +56,8 @@ export default class GeoWorld {
       opacity: 0.5,
       side: DoubleSide,
       depthWrite: false,
-      blending: AdditiveBlending,
+      //这个要改下，就会呈现出渐变的效果
+      //blending: AdditiveBlending,
     });
     const mesh3 = new Mesh(plane3, material3);
     mesh3.name = 'main_circle3';
