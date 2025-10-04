@@ -30,13 +30,13 @@ export class FloorBg {
   private uniforms: floorUniform;
   private needToAnimateFloor = false;
   private readonly planeSize = 350;
-  private readonly repeatNum: number = 40;
-  private readonly translateZ: number = -5;
-  private readonly firstDefaultR: number = -50;
-  private nextDefaultR: number = -150;
-  private readonly maxR: number = 200;
-  private readonly halfRBase: number = 5;
-  private readonly reduceR: number = 100;
+  private readonly repeatNum = 40;
+  private readonly translateZ = -5;
+  private readonly firstDefaultR = -50;
+  private nextDefaultR = -150;
+  private readonly maxR = 200;
+  private readonly halfRBase = 5;
+  private readonly reduceR = 100;
 
   constructor(params: floorParams) {
     this.config = params;
