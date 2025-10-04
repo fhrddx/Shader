@@ -3,7 +3,7 @@ import './App.css';
 import GeoWorld from './GeoWorld/GeoWorld';
 
 function App() {
-  const containerRef = useRef<any>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if(containerRef.current){
